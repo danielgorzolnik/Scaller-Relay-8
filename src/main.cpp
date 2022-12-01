@@ -29,6 +29,8 @@ void forocom_module_setup(scaller_frame *Scaller_Frame){
 
 void setup() {
   scallercom.init();
+  scallercom.setMode(MODE_SLAVE);
+  scallercom.setType(RELAY_8);
   scallercom.add_callback(&forocom_module_setup);
   pinMode(13, OUTPUT);
 }

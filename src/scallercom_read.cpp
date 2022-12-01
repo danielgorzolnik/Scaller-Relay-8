@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <ScallerCom.h>
-#include <functions.h>
+#include <ScallerComFunctions.h>
 #include "scallercom_read.h"
 #include "config.h"
 

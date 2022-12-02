@@ -1,42 +1,39 @@
 #include <Arduino.h>
 #include <ScallerCom.h>
 #include "scallercom_read.h" 
+#include "relay/relay.h"
+#include "config.h"
 
 ScallerCom scallercom;
 
-// struct testowa{
-//   uint64_t value;
-//   uint32_t value2;
-// };
+Relay relay_1(pin_relay_1);
+Relay relay_2(pin_relay_2);
+Relay relay_3(pin_relay_3);
+Relay relay_4(pin_relay_4);
+Relay relay_5(pin_relay_5);
+Relay relay_6(pin_relay_6);
+Relay relay_7(pin_relay_7);
+Relay relay_8(pin_relay_8);
 
-// testowa test;
-
-// void forocom_module_setup(scaller_frame *Scaller_Frame){
-//   Scaller_Frame->data_size = sizeof(struct testowa);
-
-//   uint8_t* structPtr = (uint8_t*) &test;
-//   for (byte i= 0; i < Scaller_Frame->data_size; i++){
-//     *structPtr = Scaller_Frame->data[i];
-//     structPtr++;
-//   }
-
-//   structPtr = (uint8_t*) &test;
-//   for (byte i= 0; i < Scaller_Frame->data_size; i++){
-//     Scaller_Frame->data[i] = *structPtr++;
-//   }
-
-//   // digitalWrite(13, !digitalRead(13));
-// }
-
+Relay *relays[8] = {
+  &relay_1,
+  &relay_2,
+  &relay_3,
+  &relay_4,
+  &relay_5,
+  &relay_6,
+  &relay_7,
+  &relay_8,
+};
+ 
 void setup() {
   scallercom.init();
   scallercom.setMode(MODE_SLAVE);
   scallercom.setType(RELAY_8);
+  scallercom.setAddress(0x01);
   scallercom.add_callback(&scallercomCallback);
-  // pinMode(13, OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   scallercom.scallercom_read();
 }

@@ -9,3 +9,7 @@
 #define pin_relay_6 8
 #define pin_relay_7 7
 #define pin_relay_8 6
+
+#define pin_uc_reset 5
+
+#define pin_dir_rs485 2

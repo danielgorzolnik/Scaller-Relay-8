@@ -34,8 +34,13 @@ void scallercomCallback(scaller_frame *Scaller_Frame){
         ack_data.type = scallercom.device_type;
         ack_data.version = SOFT_VERSION;
 
-        
         structToFrame(Scaller_Frame, (uint8_t*) &ack_data, sizeof(struct ACK_DATA), 0);
+    }
+
+    else if (function == FUNCTION_UC_RESET){
+        _delay_ms(200);
+        pinMode(pin_uc_reset, OUTPUT);
+        digitalWrite(pin_uc_reset, 0);
     }
 
     else if (function == FUNCTION_GET_STATUS){

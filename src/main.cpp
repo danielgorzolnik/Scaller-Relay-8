@@ -31,7 +31,11 @@ void setup() {
   scallercom.setMode(MODE_SLAVE);
   scallercom.setType(RELAY_8);
   scallercom.setAddress(0x01);
+  scallercom.set485pin(pin_dir_rs485);
   scallercom.add_callback(&scallercomCallback);
+
+  pinMode(pin_uc_reset, INPUT);
+  digitalWrite(pin_uc_reset, HIGH);
 }
 
 void loop() {

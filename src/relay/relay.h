@@ -15,6 +15,7 @@ class Relay {
         void setState(uint8_t);
         void toggleState();
         void setChanged();
+        void setReaded();
         RELAY_STATUS getStatusStruct();
 };
 

@@ -25,7 +25,12 @@ void Relay::setChanged(){
     this->change_readed = 0;
 }
 
+void Relay::setReaded(){
+    this->change_readed = 1;
+}
+
 uint8_t Relay::readState(){
+    this->change_readed = 1;
     return this->state;
 }
 

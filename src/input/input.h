@@ -18,6 +18,7 @@ class Input {
         Input(uint8_t, uint8_t);
         uint8_t state;
         uint8_t change_readed;
+        uint8_t local_change_readed;
         uint8_t inverted;
         uint8_t button_type;
         uint8_t relay[3];

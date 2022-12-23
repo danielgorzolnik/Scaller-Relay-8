@@ -81,5 +81,13 @@ void loop() {
   scallercom.scallercom_read();
   for (byte i=0; i<8; i++){
     inputs[i]->tick();
+    if (!inputs[i]->local_change_readed){
+      for (byte j=0; i<3; i++){
+        if (inputs[i]->relay[j] != 0xff && inputs[i]->relay[j] < 8){
+          relays[inputs[i]->relay[j]]->toggleState();
+        }
+      }
+      inputs[i]->local_change_readed = true;
+    }
   }
 }

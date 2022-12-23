@@ -9,6 +9,7 @@ Input::Input(uint8_t pin, uint8_t id){
     this->pin = pin;
     this->inverted = 0;
     this->change_readed = 1;
+    this->local_change_readed = true;
     pinMode(this->pin, INPUT_PULLUP);
     this->state = getState();
 
@@ -47,6 +48,7 @@ void Input::tick(){
     if (this->button_type == button_switch){
         if (new_state != this->state){
             this->state = new_state;
+            this->local_change_readed = false;
             setChanged();
         }
     }
@@ -57,6 +59,7 @@ void Input::tick(){
         else if (this->state && !new_state && button_pushed){
             this->state = new_state;
             button_pushed = false;
+            this->local_change_readed = false;
             setChanged();
         }
         else if (!this->state && !new_state && button_pushed){

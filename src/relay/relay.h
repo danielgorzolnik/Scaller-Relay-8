@@ -6,8 +6,9 @@
 class Relay {
     private:
         uint8_t pin;
+        uint8_t id;
     public:
-        Relay(uint8_t);
+        Relay(uint8_t, uint8_t);
         uint8_t state;
         uint8_t change_readed;
         uint8_t inverted;

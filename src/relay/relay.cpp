@@ -1,19 +1,23 @@
 #include <Arduino.h>
-#include "relay.h"
 #include <ScallerCom.h>
+#include <EEPROM.h>
+#include "relay.h"
+#include "../eeprom_map.h"
 
-Relay::Relay(uint8_t pin){
+Relay::Relay(uint8_t pin, uint8_t id){
+    this->id = id;
     this->pin = pin;
     this->inverted = 0;
     this->change_readed = 1;
     pinMode(this->pin, OUTPUT);
-    setState(0);
+    setState(EEPROM.read(EEPROM_RELAY_STATE + this->id));
 }
 
 void Relay::setState(uint8_t state){
     this->state = state;
     if (this->inverted) digitalWrite(this->pin, !this->state);
     else digitalWrite(this->pin, this->state);
+    EEPROM.update(this->id, this->state);
 }
 
 void Relay::toggleState(){

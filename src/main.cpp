@@ -49,17 +49,27 @@ Input *inputs[8] = {
   &input_8,
 };
 
-void loadFromEeprom(){
-  //relay
-  for (byte i=0; i<8; i++){
-  }
+uint8_t readAddress(){
+  int addr_analog_val = analogRead(pin_address);
+  if (addr_analog_val > (int(ADDR_SW_NONE) - ADC_TOLEANCE) && addr_analog_val < (int(ADDR_SW_NONE) + ADC_TOLEANCE)) return 0x01;
+  else if (addr_analog_val > (int(ADDR_SW_1) - ADC_TOLEANCE) && addr_analog_val < (int(ADDR_SW_1) + ADC_TOLEANCE)) return 0x02;
+  else if (addr_analog_val > (int(ADDR_SW_2) - ADC_TOLEANCE) && addr_analog_val < (int(ADDR_SW_2) + ADC_TOLEANCE)) return 0x03;
+  else if (addr_analog_val > (int(ADDR_SW_3) - ADC_TOLEANCE) && addr_analog_val < (int(ADDR_SW_3) + ADC_TOLEANCE)) return 0x04;
+  else if (addr_analog_val > (int(ADDR_SW_4) - ADC_TOLEANCE) && addr_analog_val < (int(ADDR_SW_4) + ADC_TOLEANCE)) return 0x05;
+  else if (addr_analog_val > (int(ADDR_SW_5) - ADC_TOLEANCE) && addr_analog_val < (int(ADDR_SW_5) + ADC_TOLEANCE)) return 0x06;
+  else return 0x00;
 }
 
 void setup() {
+  uint8_t selected_address = 0;
+  while (selected_address == 0){
+    selected_address = readAddress();
+    _delay_ms(100);
+  }
   scallercom.init();
   scallercom.setMode(MODE_SLAVE);
   scallercom.setType(RELAY_8);
-  scallercom.setAddress(0x01);
+  scallercom.setAddress(selected_address);
   scallercom.set485pin(pin_dir_rs485);
   scallercom.add_callback(&scallercomCallback);
 

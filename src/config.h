@@ -30,3 +30,20 @@
 
 //max485 dir pin
 #define pin_dir_rs485 2
+
+
+// ADDRESS SWITCH
+//
+// NONE - 5v (1023)
+// SW1 - 0V (0)
+// SW2 - 1k5 i 2k7 = 3,21V (657)
+// SW3 - 1k5 i 6k (2k7 + 3k3) = 4V (818)
+// SW4 - 1k5 i 11k6 (2k7 + 3k3 + 5k6) = 4.42 (904)
+// SW5 - 1k5 i 17k2 (2k7 + 3k3 + 5k6 + 5k6) = 4,59V (939)
+#define ADC_TOLEANCE 15
+#define ADDR_SW_NONE 1023
+#define ADDR_SW_1 0
+#define ADDR_SW_2 657
+#define ADDR_SW_3 818
+#define ADDR_SW_4 904
+#define ADDR_SW_5 939
